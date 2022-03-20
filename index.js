@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
 
-import {categorize, foo, getCategory, validate} from './classifier.js'
+import {categorize, getCategory, validate} from './classifier.js'
 import DBConnection from "./db/dbConnection.cjs";
 
 let port = process.env.PORT || 3000;
@@ -20,9 +20,6 @@ app.get("/", (req, res) => {
     res.send("Hellsssso Word");
 });
 
-app.get("/test", (req, res) => {
-    foo();
-});
 
 app.get("/all", (req, res) => {
     dbConnection.all("SELECT * FROM history").then(result => {
