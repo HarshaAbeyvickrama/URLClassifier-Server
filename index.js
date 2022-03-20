@@ -5,7 +5,7 @@ import bodyParser from "body-parser";
 import {categorize, getCategory, validate} from './classifier.js'
 import DBConnection from "./db/dbConnection.cjs";
 
-let port = process.env.PORT || 3000;
+let port = process.env.PORT || 3005;
 
 //Creating and connecting to db
 const dbConnection = new DBConnection('./db/urlClassifier.sqlite3');
@@ -23,6 +23,13 @@ app.get("/", (req, res) => {
 
 app.get("/all", (req, res) => {
     dbConnection.all("SELECT * FROM history").then(result => {
+        // categorize(result);
+        res.send(result);
+    })
+});
+
+app.get("/top5", (req, res) => {
+    dbConnection.all("SELECT * FROM history ORDER BY visitCount DESC LIMIT 5").then(result => {
         // categorize(result);
         res.send(result);
     })
