@@ -23,7 +23,8 @@ app.get("/", (req, res) => {
 
 app.get("/all", (req, res) => {
     dbConnection.all("SELECT * FROM history").then(result => {
-        categorize(result);
+        // categorize(result);
+        res.send(result);
     })
 });
 
